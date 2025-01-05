@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import NavLink from "./NavLink";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -11,8 +12,9 @@ const Navbar = () => {
     <nav className="fixed left-0 right-0 top-0 z-50 h-16 w-full text-white bg-transparent">
       <div className="block lg:flex lg:items-center lg:justify-between">
         <div className="flex justify-between p-4 md:p-8">
-          <Link href="/" className="text-lg font-bold uppercase md:text-xl lg:text-2xl">
-            Macro
+          <Link href="/" className="flex flex-row justify-center items-center gap-2 text-lg font-bold uppercase md:text-xl lg:text-2xl">
+            <Image src={"https://placehold.co/600x400"} alt="Logo" width={60} height={60} />
+            <span>Bap photography</span>
           </Link>
           <div className="lg:hidden">
             <button
@@ -71,6 +73,7 @@ const Navbar = () => {
           <NavLink href="/" title="Home" />
           <NavLink href="/about" title="About" />
           <NavLink href="/workshops" title="Workshops" />
+          <NavLink href="/documentation" title="Documentation" />
           <NavLink href="/portfolio" title="Portfolio" />
           <NavLink href="/contact" title="Contact" />
         </div>
