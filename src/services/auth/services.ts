@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { addData, retrieveDataByField } from "../../lib/firebase/service";
+import { addData, retrieveDataByField } from "@/lib/firebase/service";
 import bcrypt from "bcrypt";
 
 export async function signUp(userData: {
@@ -16,10 +16,6 @@ export async function signUp(userData: {
 
   if (data.length > 0) {
     return false;
-  }
-
-  if (!userData.role) {
-    userData.role = "member";
   }
 
   userData.password = await bcrypt.hash(userData.password, 10);
