@@ -1,49 +1,52 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import dummyImage from '@/assets/dummyImage.jpeg';
 
 const imageList = [
   "https://placehold.co/600x400",
-  "https://placehold.co/400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/400"
+  dummyImage.src,
 ];
 
 export default function Home() {
   const [currentImage, setCurrentImage] = useState(0);
-  const [isZooming, setIsZooming] = useState(false);
+  const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsZooming(true);
+      setIsFading(true); // Start fading out
       setTimeout(() => {
-        setCurrentImage((prevImage) => (prevImage + 1) % imageList.length);
-        setIsZooming(false);
-      }, 3000);
-    }, 5000); 
+        setCurrentImage((prevImage) => (prevImage + 1) % imageList.length); // Change image
+        setIsFading(false); // Remove fading state
+      }, 1500); // Match CSS opacity transition
+    }, 5000); // Interval between images
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className={`bg-primary min-w-screen min h-screen max-w-screen max-h-screen text-secondary flex flex-col overflow-hidden gap-8 bg-cover bg-center transition-transform duration-800 ${
-        isZooming ? "animate-zoom" : ""
-      }`}
-    style={{ backgroundImage: `url(${imageList[currentImage]})` }}
-    >
-      <div className="w-full h-1/2 flex justify-center items-end bg-opacity-50">
-        <h1 className="font-bold lg:text-8xl">PHOTOGRAPHY</h1>
-      </div>
-      <div className="w-full h-1/2 flex flex-col justify-evenly items-start lg:pl-14 lg:text-xl">
-        <p className="block w-1/3">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio natus
-          illum libero saepe dolores! Possimus reiciendis sint, incidunt dolor,
-          cumque ex natus impedit dignissimos nihil, atque error fuga similique
-          architecto!
-        </p>
-        <Link href={""} className="capitalize underline">
-          Explore Our Portfolio
-        </Link>
+    <div className="relative min-w-screen h-screen max-w-screen max-h-screen overflow-hidden">
+      {/* Background Layer */}
+      <div
+        className={`fade-background ${isFading ? "hidden-opacity" : ""}`}
+        style={{
+          backgroundImage: `url(${imageList[currentImage]})`,
+        }}
+      ></div>
+
+      {/* Static Content */}
+      <div className="static-content flex flex-col text-secondary gap-8 h-full relative">
+        {/* Heading Section */}
+        <div className="w-full h-1/2 flex justify-center items-end bg-opacity-50">
+          <h1 className="font-bold lg:text-8xl"><span>BAP</span>{"  "}<span>PHOTOGRAPHY</span></h1>
+        </div>
+
+        {/* Text Section */}
+        <div className="absolute bottom-8 left-8">
+          <Link href={""} className="capitalize underline text-xl lg:text-2xl">
+            Explore Our Portfolio
+          </Link>
+        </div>
       </div>
     </div>
   );
