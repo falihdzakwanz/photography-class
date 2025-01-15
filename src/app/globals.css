@@ -2,19 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fade-in and zoom-in effects for background */
 .fade-background {
-  transition: background-image 1s ease-in-out;
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: zoomIn 5s infinite ease-in-out;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 0; /* Ensure background is behind content */
 }
 
+.hidden-opacity {
+  opacity: 0; /* Fade-out effect */
+}
+
+.static-content {
+  position: relative;
+  z-index: 1; /* Ensure content stays on top */
+}
+
+/* Keyframe for zoom-in */
 @keyframes zoomIn {
   0% {
     transform: scale(1);
   }
-  100% {
+  50% {
     transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
-.animate-zoom {
-  animation: zoomIn 3s forwards;
-}
