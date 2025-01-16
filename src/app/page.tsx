@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import dummyImage from '@/assets/dummyImage.jpeg';
+import GuestLayout from "@/components/layouts/GuestLayout";
 
 const imageList = [
   "https://placehold.co/600x400",
@@ -25,6 +26,7 @@ export default function Home() {
   }, []);
 
   return (
+    <GuestLayout>
     <div className="relative min-w-screen h-screen max-w-screen max-h-screen overflow-hidden">
       {/* Background Layer */}
       <div
@@ -49,5 +51,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </GuestLayout>
   );
 }
