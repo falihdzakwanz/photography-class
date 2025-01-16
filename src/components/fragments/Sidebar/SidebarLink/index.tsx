@@ -14,7 +14,7 @@ const SidebarLink = (props: MenuItem) => {
         <Link
             key={label}
             href={href}
-            className="text-white flex items-center gap-3 px-4 py-3 text-sm uppercase transition-colors hover:bg-[#5B6179]"
+            className="text-primary flex items-center gap-3 px-4 py-3 text-sm uppercase transition-colors hover:bg-admin-primary hover:text-white"
         >
             {icon}
             <span>{label}</span>

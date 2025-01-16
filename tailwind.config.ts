@@ -13,6 +13,8 @@ export default {
         secondary: "#D9D9D9",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "admin-primary": "#00CA7A",
+        "admin-accent": "#6FD3AB"
       },
     },
   },
