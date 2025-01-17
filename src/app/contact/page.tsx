@@ -54,28 +54,24 @@ const ContactPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         try {
-            const response = await fetch('http://localhost:5000/send-email', {
+            const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
-
-            // Check if the response is OK (status code 200-299)
+    
             if (!response.ok) {
-                // Parse the error response from the server
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Failed to send email');
             }
-
-            // If the response is OK, parse the success response
+    
             const result = await response.json();
             toast.success('Email sent successfully!');
-
-            // Clear the form fields
+    
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -84,7 +80,6 @@ const ContactPage: React.FC = () => {
                 message: '',
             });
         } catch (error) {
-            // Handle both network-level errors and HTTP errors
             toast.error(`Failed to send email: ${(error as Error).message}`);
         }
     };
